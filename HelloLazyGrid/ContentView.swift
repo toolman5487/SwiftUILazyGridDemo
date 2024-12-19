@@ -8,14 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    let columns = [GridItem(.flexible()),GridItem(.flexible())]
+    let balls = ["🏀","⚽️","🏈","⚾️","🥎","🎾","🏐"]
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ScrollView(){
+            LazyVGrid(columns: columns) {
+                ForEach(balls, id: \.self) { ball in
+                    Text(ball)
+                        .font(.system(size: 60))
+                        .frame(width: 100, height: 150)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 15)
+                                .stroke(.black,lineWidth: 1)
+                        }
+                }
+            }
         }
-        .padding()
     }
 }
 
